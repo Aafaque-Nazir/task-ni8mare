@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LibroSys - Premium Library Management Software
 
-## Getting Started
+LibroSys is a modern, production-ready, console and web-based Library Management Software built with Next.js App Router, React, and Vanilla CSS. It provides a jaw-dropping premium UI/UX design featuring glassmorphism and stunning color palettes.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Book Management**: Add, update, delete, and list books. Books have attributes such as Book ID, Title, Author, Year of Publication, and Status (Available, Checked Out).
+- **Patron Management**: Add, update, and delete library patrons. Patrons have attributes such as Patron ID, Name, and a list of Books Checked Out.
+- **Library Operations**: 
+  - **Checkout Book**: Allows patrons to check out books that are available. Updates the book status and patron's record.
+  - **Return Book**: Allows patrons to return checked-out books.
+- **Data Storage**: Utilizes local file storage (`data/books.json` and `data/patrons.json`) using Node.js `fs` to simulate a database.
+- **Premium UI**: Dark mode, glassmorphic effects, modern typography, and responsive design.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Prerequisites
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js (v18.17 or later)
+- npm, yarn, or pnpm
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Compile and Run
 
-## Learn More
+1. **Install dependencies:**
+   Open your terminal in the root directory of the project and run:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Open the application:**
+   Navigate to `http://localhost:3000` in your web browser. You will see the Dashboard where you can manage your library.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+- `src/lib/store.ts`: Handles data models and local file storage logic (JSON read/write).
+- `src/lib/actions.ts`: Next.js Server Actions handling data mutations.
+- `src/app/`: Contains the Next.js pages, routing, and styling (`globals.css`).
+- `data/`: Contains the JSON files used for data persistence (auto-generated when you add data).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Built With
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js (App Router, Server Actions)
+- React
+- Lucide React (Icons)
+- Vanilla CSS (Glassmorphism, gradients, CSS variables)
