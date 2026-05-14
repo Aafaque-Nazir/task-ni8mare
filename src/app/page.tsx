@@ -1,6 +1,7 @@
 import { getBooks, getPatrons } from '@/lib/store';
 import { Book, Users, CheckCircle, Clock } from 'lucide-react';
 import Link from 'next/link';
+import PageWrapper from '@/components/PageWrapper';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,8 +15,9 @@ export default async function Dashboard() {
   const totalPatrons = patrons.length;
 
   return (
-    <div>
-      <h2>Dashboard Overview</h2>
+    <PageWrapper>
+      <div>
+        <h2>Dashboard Overview</h2>
       
       <div className="card-grid" style={{ marginBottom: '2rem' }}>
         <div className="glass stat-card">
@@ -99,6 +101,6 @@ export default async function Dashboard() {
           </div>
         </div>
       </div>
-    </div>
+    </PageWrapper>
   );
 }
