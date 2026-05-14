@@ -5,6 +5,7 @@ import { Patron } from '@/lib/store';
 import { addPatron, updatePatron, deletePatron } from '@/lib/actions';
 import { Plus, Search, Edit2, Trash2, X, User } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
+import PageWrapper from '@/components/PageWrapper';
 
 export default function PatronManager({ initialPatrons }: { initialPatrons: Patron[] }) {
   const [search, setSearch] = useState('');
@@ -50,9 +51,10 @@ export default function PatronManager({ initialPatrons }: { initialPatrons: Patr
   const editingPatron = initialPatrons.find(p => p.id === editingId);
 
   return (
-    <div>
-      <div className="header-flex">
-        <h2>Patron Management</h2>
+    <PageWrapper>
+      <div>
+        <div className="header-flex">
+          <h2>Patron Management</h2>
         <button className="btn btn-primary" onClick={openAdd} style={{ background: 'linear-gradient(135deg, var(--secondary-color), #be185d)', boxShadow: '0 4px 14px 0 rgba(236, 72, 153, 0.39)' }}>
           <Plus className="w-5 h-5" /> Add Patron
         </button>
@@ -146,5 +148,6 @@ export default function PatronManager({ initialPatrons }: { initialPatrons: Patr
         </div>
       )}
     </div>
+    </PageWrapper>
   );
 }

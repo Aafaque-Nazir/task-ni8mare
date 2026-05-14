@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Book, Patron } from '@/lib/store';
 import { checkoutBook, returnBook } from '@/lib/actions';
 import { BookOpen, UserCheck, RefreshCw } from 'lucide-react';
+import PageWrapper from '@/components/PageWrapper';
 
 export default function OperationsClient({ 
   books, 
@@ -43,8 +44,9 @@ export default function OperationsClient({
   const checkedOutBooks = books.filter(b => b.status === 'Checked Out');
 
   return (
-    <div>
-      <h2 style={{ marginBottom: '2rem' }}>Library Operations</h2>
+    <PageWrapper>
+      <div>
+        <h2 style={{ marginBottom: '2rem' }}>Library Operations</h2>
 
       <div className="operations-grid">
         
@@ -149,5 +151,6 @@ export default function OperationsClient({
 
       </div>
     </div>
+    </PageWrapper>
   );
 }

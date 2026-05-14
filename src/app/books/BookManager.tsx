@@ -5,6 +5,7 @@ import { Book } from '@/lib/store';
 import { addBook, updateBook, deleteBook } from '@/lib/actions';
 import { Plus, Search, Edit2, Trash2, X } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
+import PageWrapper from '@/components/PageWrapper';
 
 export default function BookManager({ initialBooks }: { initialBooks: Book[] }) {
   const [search, setSearch] = useState('');
@@ -52,9 +53,10 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
   const editingBook = initialBooks.find(b => b.id === editingId);
 
   return (
-    <div>
-      <div className="header-flex">
-        <h2>Book Management</h2>
+    <PageWrapper>
+      <div>
+        <div className="header-flex">
+          <h2>Book Management</h2>
         <button className="btn btn-primary" onClick={openAdd}>
           <Plus className="w-5 h-5" /> Add Book
         </button>
@@ -168,5 +170,6 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
         </div>
       )}
     </div>
+    </PageWrapper>
   );
 }
