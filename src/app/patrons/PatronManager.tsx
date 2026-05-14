@@ -4,15 +4,17 @@ import { useState } from 'react';
 import { Patron } from '@/lib/store';
 import { addPatron, updatePatron, deletePatron } from '@/lib/actions';
 import { Plus, Search, Edit2, Trash2, X, User } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
 
 export default function PatronManager({ initialPatrons }: { initialPatrons: Patron[] }) {
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 300);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const filteredPatrons = initialPatrons.filter(p => 
-    p.name.toLowerCase().includes(search.toLowerCase()) ||
-    p.id.toLowerCase().includes(search.toLowerCase())
+    p.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+    p.id.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

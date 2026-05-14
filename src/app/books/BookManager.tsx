@@ -4,17 +4,19 @@ import { useState } from 'react';
 import { Book } from '@/lib/store';
 import { addBook, updateBook, deleteBook } from '@/lib/actions';
 import { Plus, Search, Edit2, Trash2, X } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
 
 export default function BookManager({ initialBooks }: { initialBooks: Book[] }) {
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 300);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  // Filter books based on search
+  // Filter books based on debounced search
   const filteredBooks = initialBooks.filter(b => 
-    b.title.toLowerCase().includes(search.toLowerCase()) ||
-    b.author.toLowerCase().includes(search.toLowerCase()) ||
-    b.status.toLowerCase().includes(search.toLowerCase())
+    b.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+    b.author.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+    b.status.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
