@@ -55,7 +55,7 @@ export default function PatronManager({ initialPatrons }: { initialPatrons: Patr
       <div>
         <div className="header-flex">
           <h2>Patron Management</h2>
-        <button className="btn btn-primary" onClick={openAdd} style={{ background: 'linear-gradient(135deg, var(--secondary-color), #be185d)', boxShadow: '0 4px 14px 0 rgba(236, 72, 153, 0.39)' }}>
+        <button className="btn btn-primary" onClick={openAdd}>
           <Plus className="w-5 h-5" /> Add Patron
         </button>
       </div>
@@ -75,7 +75,7 @@ export default function PatronManager({ initialPatrons }: { initialPatrons: Patr
           <div key={patron.id} className="glass card">
             <div className="card-header" style={{ alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, var(--secondary-color), #be185d)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--primary-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000' }}>
                   <User className="w-5 h-5" />
                 </div>
                 <div>
@@ -92,7 +92,7 @@ export default function PatronManager({ initialPatrons }: { initialPatrons: Patr
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button 
                   className="btn btn-sm" 
-                  style={{ background: 'rgba(59,130,246,0.1)', color: 'var(--primary-color)' }}
+                  style={{ background: 'rgba(234,179,8,0.1)', color: 'var(--primary-color)' }}
                   onClick={() => openEdit(patron)}
                 >
                   <Edit2 className="w-4 h-4" />
@@ -139,7 +139,7 @@ export default function PatronManager({ initialPatrons }: { initialPatrons: Patr
                 <button type="button" className="btn" style={{ flex: 1, background: 'rgba(255,255,255,0.1)' }} onClick={() => setIsModalOpen(false)}>
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary" style={{ flex: 1, background: 'linear-gradient(135deg, var(--secondary-color), #be185d)' }}>
+                <button type="submit" className="btn btn-primary" style={{ flex: 1 }}>
                   {editingId ? 'Update' : 'Save'}
                 </button>
               </div>

@@ -54,7 +54,7 @@ export default function OperationsClient({
         <div className="glass card">
           <div className="card-header" style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
             <h3 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <BookOpen className="w-6 h-6 text-blue-500" />
+              <BookOpen className="w-6 h-6" style={{ color: 'var(--primary-color)' }} />
               Checkout Book
             </h3>
           </div>
@@ -109,7 +109,7 @@ export default function OperationsClient({
         <div className="glass card">
           <div className="card-header" style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
             <h3 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <RefreshCw className="w-6 h-6 text-green-500" />
+              <RefreshCw className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
               Return Book
             </h3>
           </div>
@@ -137,7 +137,7 @@ export default function OperationsClient({
               </p>
             )}
 
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem', background: 'linear-gradient(135deg, #10b981, #047857)', boxShadow: '0 4px 14px 0 rgba(16, 185, 129, 0.39)' }} disabled={checkedOutBooks.length === 0}>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={checkedOutBooks.length === 0}>
               <RefreshCw className="w-5 h-5" /> Return Book
             </button>
 

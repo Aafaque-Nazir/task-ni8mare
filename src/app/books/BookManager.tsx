@@ -92,7 +92,7 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button 
                   className="btn btn-sm" 
-                  style={{ background: 'rgba(59,130,246,0.1)', color: 'var(--primary-color)' }}
+                  style={{ background: 'rgba(234,179,8,0.1)', color: 'var(--primary-color)' }}
                   onClick={() => openEdit(book)}
                 >
                   <Edit2 className="w-4 h-4" />

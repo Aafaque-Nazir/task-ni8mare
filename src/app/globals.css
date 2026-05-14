@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-color: #0f172a; /* Slate 900 */
-  --text-primary: #f8fafc; /* Slate 50 */
-  --text-secondary: #cbd5e1; /* Slate 300 */
-  --primary-color: #3b82f6; /* Blue 500 */
-  --primary-hover: #2563eb; /* Blue 600 */
-  --secondary-color: #ec4899; /* Pink 500 */
-  --surface-color: rgba(30, 41, 59, 0.7); /* Slate 800 with opacity */
+  --bg-color: #050505; /* Deep Black */
+  --surface-color: #121212; /* Dark Gray for cards */
+  --text-primary: #ffffff; /* White */
+  --text-secondary: #a3a3a3; /* Neutral Gray */
+  --primary-color: #eab308; /* Vibrant Yellow */
+  --primary-hover: #ca8a04; /* Darker Yellow */
+  --secondary-color: #262626; /* Darker Gray */
   --border-color: rgba(255, 255, 255, 0.1);
   --error-color: #ef4444; /* Red 500 */
-  --success-color: #10b981; /* Emerald 500 */
+  --success-color: #eab308; /* Yellow 500 for success to match theme */
   
   --font-family: 'Inter', sans-serif;
 }
@@ -27,10 +27,6 @@ html {
 
 body {
   background-color: var(--bg-color);
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
   color: var(--text-primary);
   font-family: var(--font-family);
   min-height: 100vh;
@@ -54,14 +50,12 @@ input, select, textarea {
   font-family: inherit;
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism utility - adapted for solid dark theme */
 .glass {
   background: var(--surface-color);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 }
 
 /* Layout */
@@ -74,8 +68,7 @@ input, select, textarea {
   width: 260px;
   padding: 2rem 1.5rem;
   border-right: 1px solid var(--border-color);
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(20px);
+  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -87,9 +80,7 @@ input, select, textarea {
 .sidebar h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -118,7 +109,8 @@ input, select, textarea {
 }
 
 .nav-link.active {
-  background: linear-gradient(to right, rgba(59, 130, 246, 0.15), transparent);
+  background: rgba(234, 179, 8, 0.1);
+  color: var(--primary-color);
   border-left: 3px solid var(--primary-color);
 }
 
@@ -158,8 +150,8 @@ p {
 .input-field {
   padding: 0.85rem 1rem;
   border-radius: 0.75rem;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #1a1a1a;
+  border: 1px solid #333;
   color: var(--text-primary);
   font-size: 1rem;
   transition: all 0.2s ease;
@@ -168,8 +160,8 @@ p {
 .input-field:focus {
   outline: none;
   border-color: var(--primary-color);
-  background: rgba(15, 23, 42, 0.8);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  background: #262626;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
 }
 
 /* Fix select options readability */
@@ -193,14 +185,15 @@ select option {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-  color: white;
-  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+  background: var(--primary-color);
+  color: #000;
+  box-shadow: 0 4px 14px 0 rgba(234, 179, 8, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  background: var(--primary-hover);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.4);
 }
 
 .btn-danger {
@@ -237,8 +230,8 @@ select option {
 
 .card:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.4), 0 0 15px rgba(59, 130, 246, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(234, 179, 8, 0.1);
+  border-color: var(--primary-color);
 }
 
 .card-header {
@@ -267,15 +260,15 @@ select option {
 }
 
 .badge.available {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--success-color);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(234, 179, 8, 0.1);
+  color: var(--primary-color);
+  border: 1px solid rgba(234, 179, 8, 0.3);
 }
 
 .badge.checked-out {
-  background: rgba(245, 158, 11, 0.1);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Stats */
@@ -293,7 +286,7 @@ select option {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(234, 179, 8, 0.1);
   color: var(--primary-color);
 }
 
@@ -314,8 +307,8 @@ select option {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-color);
+  background: #1a1a1a;
+  border: 1px solid #333;
   padding: 0.75rem 1rem;
   border-radius: 1rem;
   margin-bottom: 2rem;

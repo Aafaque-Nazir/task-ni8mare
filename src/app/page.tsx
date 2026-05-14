@@ -31,7 +31,7 @@ export default async function Dashboard() {
         </div>
 
         <div className="glass stat-card">
-          <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success-color)' }}>
+          <div className="stat-icon" style={{ background: 'rgba(255, 255, 255, 0.1)', color: 'var(--text-primary)' }}>
             <CheckCircle className="w-6 h-6" />
           </div>
           <div className="stat-content">
@@ -41,7 +41,7 @@ export default async function Dashboard() {
         </div>
 
         <div className="glass stat-card">
-          <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#fbbf24' }}>
+          <div className="stat-icon" style={{ background: 'rgba(255, 255, 255, 0.1)', color: 'var(--text-secondary)' }}>
             <Clock className="w-6 h-6" />
           </div>
           <div className="stat-content">
@@ -51,7 +51,7 @@ export default async function Dashboard() {
         </div>
 
         <div className="glass stat-card">
-          <div className="stat-icon" style={{ background: 'rgba(236, 72, 153, 0.1)', color: 'var(--secondary-color)' }}>
+          <div className="stat-icon" style={{ background: 'rgba(234, 179, 8, 0.2)', color: 'var(--primary-color)' }}>
             <Users className="w-6 h-6" />
           </div>
           <div className="stat-content">
@@ -70,10 +70,10 @@ export default async function Dashboard() {
             <Link href="/books" className="btn btn-primary" style={{ justifyContent: 'flex-start' }}>
               <Book className="w-5 h-5" /> Manage Books
             </Link>
-            <Link href="/patrons" className="btn btn-primary" style={{ justifyContent: 'flex-start', background: 'linear-gradient(135deg, var(--secondary-color), #be185d)' }}>
+            <Link href="/patrons" className="btn btn-primary" style={{ justifyContent: 'flex-start', background: '#333', color: '#fff', boxShadow: 'none' }}>
               <Users className="w-5 h-5" /> Manage Patrons
             </Link>
-            <Link href="/operations" className="btn btn-primary" style={{ justifyContent: 'flex-start', background: 'linear-gradient(135deg, #10b981, #047857)' }}>
+            <Link href="/operations" className="btn btn-primary" style={{ justifyContent: 'flex-start', background: '#fff', color: '#000', boxShadow: 'none' }}>
               <Clock className="w-5 h-5" /> Checkout / Return
             </Link>
           </div>
@@ -100,6 +100,7 @@ export default async function Dashboard() {
             )}
           </div>
         </div>
+      </div>
       </div>
     </PageWrapper>
   );

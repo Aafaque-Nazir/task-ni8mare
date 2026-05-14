@@ -20,7 +20,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       <div className="sidebar-header">
         <h1>
-          <Library className="w-8 h-8 text-blue-500" />
+          <Library className="w-8 h-8" style={{ color: 'var(--primary-color)' }} />
           LibroSys
         </h1>
         <button 
@@ -50,7 +50,7 @@ export default function Sidebar() {
         })}
       </nav>
       
-      <div className="premium-badge" style={{ marginTop: 'auto', padding: '1rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '1rem', border: '1px solid var(--border-color)' }}>
+      <div className="premium-badge" style={{ marginTop: 'auto', padding: '1rem', background: 'rgba(234, 179, 8, 0.1)', borderRadius: '1rem', border: '1px solid var(--border-color)' }}>
         <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--primary-color)', marginBottom: '0.25rem' }}>Premium Edition</p>
         <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Library Management System v1.0</p>
       </div>
