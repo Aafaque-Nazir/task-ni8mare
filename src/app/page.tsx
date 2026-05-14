@@ -59,7 +59,7 @@ export default async function Dashboard() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+      <div className="dashboard-grid">
         <div className="glass card">
           <div className="card-header">
             <h3 className="card-title">Quick Actions</h3>

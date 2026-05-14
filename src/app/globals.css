@@ -218,7 +218,7 @@ select option {
 /* Cards & Tables */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 1.5rem;
 }
 
@@ -332,6 +332,28 @@ select option {
   color: var(--text-secondary);
 }
 
+/* Page Specific Grids */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.operations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  gap: 2rem;
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 /* Modal */
 .modal-overlay {
   position: fixed;
@@ -374,18 +396,67 @@ select option {
   .sidebar {
     width: 100%;
     height: auto;
-    position: relative;
+    position: sticky;
+    top: 0;
     padding: 1rem;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    z-index: 40;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .sidebar-header {
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    color: var(--text-primary);
   }
   
   .nav-links {
-    display: none; /* In a real app, we'd add a hamburger menu */
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
   
+  .premium-badge {
+    display: none;
+  }
+
   .main-content {
     padding: 1rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .operations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-btn {
+    display: none;
   }
 }

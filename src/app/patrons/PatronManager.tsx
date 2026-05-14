@@ -51,7 +51,7 @@ export default function PatronManager({ initialPatrons }: { initialPatrons: Patr
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+      <div className="header-flex">
         <h2>Patron Management</h2>
         <button className="btn btn-primary" onClick={openAdd} style={{ background: 'linear-gradient(135deg, var(--secondary-color), #be185d)', boxShadow: '0 4px 14px 0 rgba(236, 72, 153, 0.39)' }}>
           <Plus className="w-5 h-5" /> Add Patron

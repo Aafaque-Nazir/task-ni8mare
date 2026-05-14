@@ -46,7 +46,7 @@ export default function OperationsClient({
     <div>
       <h2 style={{ marginBottom: '2rem' }}>Library Operations</h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
+      <div className="operations-grid">
         
         {/* Checkout Section */}
         <div className="glass card">

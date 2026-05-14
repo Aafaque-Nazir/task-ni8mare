@@ -53,7 +53,7 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+      <div className="header-flex">
         <h2>Book Management</h2>
         <button className="btn btn-primary" onClick={openAdd}>
           <Plus className="w-5 h-5" /> Add Book
