@@ -1,17 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { Book } from '@/lib/store';
 import { addBook, updateBook, deleteBook } from '@/lib/actions';
-import { Plus, Search, Edit2, Trash2, X } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, X, Loader2 } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
 import PageWrapper from '@/components/PageWrapper';
 
 export default function BookManager({ initialBooks }: { initialBooks: Book[] }) {
+  const router = useRouter();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 300);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   // Filter books based on debounced search
   const filteredBooks = initialBooks.filter(b => 
@@ -24,19 +27,35 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     
-    if (editingId) {
-      await updateBook(editingId, formData);
-    } else {
-      await addBook(formData);
+    try {
+      if (editingId) {
+        await updateBook(editingId, formData);
+      } else {
+        await addBook(formData);
+      }
+      
+      setIsModalOpen(false);
+      setEditingId(null);
+      startTransition(() => {
+        router.refresh();
+      });
+    } catch (error) {
+      console.error('Failed to save book:', error);
+      alert('Failed to save book. Please try again.');
     }
-    
-    setIsModalOpen(false);
-    setEditingId(null);
   };
 
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this book?')) {
-      await deleteBook(id);
+      try {
+        await deleteBook(id);
+        startTransition(() => {
+          router.refresh();
+        });
+      } catch (error) {
+        console.error('Failed to delete book:', error);
+        alert('Failed to delete book. Please try again.');
+      }
     }
   };
 
@@ -57,7 +76,7 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
       <div>
         <div className="header-flex">
           <h2>Book Management</h2>
-        <button className="btn btn-primary" onClick={openAdd}>
+        <button className="btn btn-primary" onClick={openAdd} disabled={isPending}>
           <Plus className="w-5 h-5" /> Add Book
         </button>
       </div>
@@ -71,6 +90,13 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
+
+      {isPending && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--primary-color)' }}>
+          <Loader2 className="w-4 h-4" style={{ animation: 'spin 1s linear infinite' }} />
+          <span style={{ fontSize: '0.875rem' }}>Updating...</span>
+        </div>
+      )}
 
       <div className="card-grid">
         {filteredBooks.map(book => (
@@ -94,12 +120,14 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
                   className="btn btn-sm" 
                   style={{ background: 'rgba(234,179,8,0.1)', color: 'var(--primary-color)' }}
                   onClick={() => openEdit(book)}
+                  disabled={isPending}
                 >
                   <Edit2 className="w-4 h-4" />
                 </button>
                 <button 
                   className="btn btn-sm btn-danger"
                   onClick={() => handleDelete(book.id)}
+                  disabled={isPending}
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -115,7 +143,7 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
       </div>
 
       {isModalOpen && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setIsModalOpen(false); }}>
           <div className="glass modal">
             <div className="modal-header">
               <h3>{editingId ? 'Edit Book' : 'Add New Book'}</h3>
@@ -133,6 +161,7 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
                   className="input-field" 
                   required 
                   defaultValue={editingBook?.title || ''}
+                  key={editingId || 'new'}
                 />
               </div>
               <div className="form-group">
@@ -144,6 +173,7 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
                   className="input-field" 
                   required 
                   defaultValue={editingBook?.author || ''}
+                  key={`author-${editingId || 'new'}`}
                 />
               </div>
               <div className="form-group">
@@ -155,14 +185,15 @@ export default function BookManager({ initialBooks }: { initialBooks: Book[] }) 
                   className="input-field" 
                   required 
                   defaultValue={editingBook?.year || new Date().getFullYear()}
+                  key={`year-${editingId || 'new'}`}
                 />
               </div>
               <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
                 <button type="button" className="btn" style={{ flex: 1, background: 'rgba(255,255,255,0.1)' }} onClick={() => setIsModalOpen(false)}>
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary" style={{ flex: 1 }}>
-                  {editingId ? 'Update' : 'Save'}
+                <button type="submit" className="btn btn-primary" style={{ flex: 1 }} disabled={isPending}>
+                  {isPending ? 'Saving...' : (editingId ? 'Update' : 'Save')}
                 </button>
               </div>
             </form>

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { Book, Patron } from '@/lib/store';
 import { checkoutBook, returnBook } from '@/lib/actions';
-import { BookOpen, UserCheck, RefreshCw } from 'lucide-react';
+import { BookOpen, UserCheck, RefreshCw, Loader2 } from 'lucide-react';
 import PageWrapper from '@/components/PageWrapper';
 
 export default function OperationsClient({ 
@@ -13,8 +14,10 @@ export default function OperationsClient({
   books: Book[], 
   patrons: Patron[] 
 }) {
+  const router = useRouter();
   const [checkoutError, setCheckoutError] = useState('');
   const [returnError, setReturnError] = useState('');
+  const [isPending, startTransition] = useTransition();
 
   const handleCheckout = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,8 +26,12 @@ export default function OperationsClient({
     try {
       await checkoutBook(formData);
       (e.target as HTMLFormElement).reset();
-    } catch (err: any) {
-      setCheckoutError(err.message || 'Failed to checkout book');
+      startTransition(() => {
+        router.refresh();
+      });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to checkout book';
+      setCheckoutError(message);
     }
   };
 
@@ -35,8 +42,12 @@ export default function OperationsClient({
     try {
       await returnBook(formData);
       (e.target as HTMLFormElement).reset();
-    } catch (err: any) {
-      setReturnError(err.message || 'Failed to return book');
+      startTransition(() => {
+        router.refresh();
+      });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to return book';
+      setReturnError(message);
     }
   };
 
@@ -47,6 +58,13 @@ export default function OperationsClient({
     <PageWrapper>
       <div>
         <h2 style={{ marginBottom: '2rem' }}>Library Operations</h2>
+
+        {isPending && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--primary-color)' }}>
+            <Loader2 className="w-4 h-4" style={{ animation: 'spin 1s linear infinite' }} />
+            <span style={{ fontSize: '0.875rem' }}>Processing...</span>
+          </div>
+        )}
 
       <div className="operations-grid">
         
@@ -88,7 +106,7 @@ export default function OperationsClient({
               </p>
             )}
 
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={availableBooks.length === 0 || patrons.length === 0}>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={availableBooks.length === 0 || patrons.length === 0 || isPending}>
               <UserCheck className="w-5 h-5" /> Checkout
             </button>
 
@@ -137,7 +155,7 @@ export default function OperationsClient({
               </p>
             )}
 
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={checkedOutBooks.length === 0}>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={checkedOutBooks.length === 0 || isPending}>
               <RefreshCw className="w-5 h-5" /> Return Book
             </button>
 
